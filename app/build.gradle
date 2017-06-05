@@ -1,0 +1,44 @@
+apply plugin: 'com.android.application'
+apply plugin: 'de.mannodermaus.android-junit5'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 'android-O'
+    buildToolsVersion "26.0.0-rc2"
+    defaultConfig {
+        applicationId "com.techyos.testingdemo"
+        minSdkVersion 16
+        targetSdkVersion 'O'
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+junitPlatform {
+    jupiterVersion '5.0.0-M4'
+    platformVersion '1.0.0-M4'
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile "org.jetbrains.anko:anko-common:$anko_version"
+    compile 'com.android.support:appcompat-v7:26.0.0-beta1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    testCompile junitJupiter()
+    testProvided "org.junit.vintage:junit-vintage-engine:4.12.0-M4"
+    testCompile 'org.assertj:assertj-core:3.6.2'
+}
